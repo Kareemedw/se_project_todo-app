@@ -1,17 +1,33 @@
 # Simple Todo App
 
-Give a brief description of the project here. Feel free to give it a different name.
+📌 Project Description
 
-## Functionality
+A simple and intuitive ToDo application that allows users to add tasks, optionally include a due date, mark them as completed, and delete them. The interface includes a modal form for adding new items and a counter displaying completion status.
 
-Give a more detailed explanation of the project and its functionality.
+## 🎯 Features
 
-## Technology
+Add new ToDo items with form validation
 
-Give a description of the technologies and techniques used. Pictures, GIFs, or screenshots that detail the project features are recommended.
+Optional due date input
+
+Mark tasks as complete via checkboxes
+
+Delete functionality for each task
+
+Live progress counter
+
+## Technologies & Techniques Used
+
+HTML5 for structure
+
+CSS3 for styling and layout
+
+JavaScript (ES Modules) for dynamic functionality
+
+Popup Modal for adding tasks
+
+Template Element for cloning new todo items
 
 ## Deployment
 
-This project is deployed on GitHub Pages:
-
-- ADD LINK HERE
+This project is deployed on GitHub Pages: https://kareemedw.github.io/se_project_todo-app/

@@ -73,8 +73,12 @@
             <ul class="todos__list">
               <template id="todo-template">
                 <li class="todo">
-                  <label class="todo__label" for="">
-                    <input class="todo__completed" id="" type="checkbox" />
+                  <label class="todo__label" for="inputElement">
+                    <input
+                      class="todo__completed"
+                      id="inputElement"
+                      type="checkbox"
+                    />
                     <span class="todo__name"></span>
                     <span class="todo__date"></span>
                   </label>
@@ -88,8 +92,7 @@
               </template>
             </ul>
           </section>
-          <script src="./pages/index.js" defer></script>
-          <script src="./scripts/validate.js" defer></script>
+          <script type="module" src="./pages/index.js"></script>
         </main>
       </div>
     </div>
