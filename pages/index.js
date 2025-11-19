@@ -6,23 +6,66 @@ import Todo from "../components/Todo.js";
 
 import FormValidator from "../components/FormValidator.js";
 
+import Section from "../components/Section.js";
+
+import PopupWithForm from "../components/PopupWithForm.js";
+
+import TodoCounter from "../components/TodoCounter.js";
+
 const addTodoButton = document.querySelector(".button_action_add");
-const addTodoPopup = document.querySelector("#add-todo-popup");
-const addTodoForm = addTodoPopup.querySelector(".popup__form");
-const addTodoCloseBtn = addTodoPopup.querySelector(".popup__close");
+const addTodoPopups = document.querySelector("#add-todo-popup");
+const addTodoForm = addTodoPopups.querySelector(".popup__form");
+const addTodoCloseBtn = addTodoPopups.querySelector(".popup__close");
 const todosList = document.querySelector(".todos__list");
 
-const openModal = (modal) => {
-  modal.classList.add("popup_visible");
-};
+const todoCounter = new TodoCounter(initialTodos, ".counter__text");
 
-const closeModal = (modal) => {
-  modal.classList.remove("popup_visible");
-};
+function handleCheck(completed) {
+  todoCounter.updateCompleted(completed);
+}
+
+const section = new Section({
+  items: initialTodos,
+  renderer: (todoData) => {
+    const todo = new Todo(todoData, "#todo-template");
+    const todoElement = todo.getView();
+    section.additems(todoElement);
+  },
+  containerSelector: ".todos__list",
+});
+
+section.renderItems();
+
+const addTodoPopup = new PopupWithForm({
+  popupSelector: "#add-todo-popup",
+  submitCallBack: () => {},
+  /*const { name, date } = formValues;
+
+  // timezone
+  const dateObj = new Date(date);
+  if (!isNaN(dateObj)) {
+    dateObj.setMinutes(dateObj.getMinutes() + dateObj.getTimezoneOffset());
+  }
+
+  const newTodoData = {
+    id: uuidv4(),
+    name,
+    date: dateObj,
+    completed: false,
+  };
+
+  const todoElement = createTodoElement(newTodoData);
+  section.additems(todoElement);
+
+  // update counter
+  todoCounter.updateTotal(true);*/
+});
+
+//addTodoPopup.setEventListeners();
 
 // The logic in this function should all be handled in the Todo class.
 const generateTodo = (data) => {
-  const todo = new Todo(data, "#todo-template");
+  const todo = new Todo(data, "#todo-template", handleCheck);
   const todoElement = todo.getView();
   return todoElement;
 };
@@ -33,11 +76,11 @@ const renderTodo = (item) => {
 };
 
 addTodoButton.addEventListener("click", () => {
-  openModal(addTodoPopup);
+  addTodoPopup.open();
 });
 
 addTodoCloseBtn.addEventListener("click", () => {
-  closeModal(addTodoPopup);
+  addTodoPopup.close();
 });
 
 addTodoForm.addEventListener("submit", (evt) => {
@@ -53,11 +96,11 @@ addTodoForm.addEventListener("submit", (evt) => {
   const values = { name, date, id };
   renderTodo(values);
   newTodoFormValidator.resetValidation();
-  closeModal(addTodoPopup);
+  closeModal(addTodoPopups);
 });
-
-initialTodos.forEach(renderTodo);
 
 const newTodoFormValidator = new FormValidator(validationConfig, addTodoForm);
 
 newTodoFormValidator.enableValidation();
+
+//const newPopup = new Popup();
