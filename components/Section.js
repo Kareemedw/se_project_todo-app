@@ -11,7 +11,7 @@ class Section {
     });
   }
 
-  additems(domElement) {
+  addItems(domElement) {
     this._container.prepend(domElement);
   }
 }

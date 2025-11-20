@@ -6,13 +6,13 @@ class Popup {
 
   open() {
     this._popup.classList.add("popup_visible");
-    //document.addEventListener("keydown", this._handleEscapeClose);
+    document.addEventListener("keydown", this._handleEscapeClose);
   }
 
   // Close modal
   close() {
     this._popup.classList.remove("popup_visible");
-    //document.removeEventListener("keydown", this._handleEscapeClose);
+    document.removeEventListener("keydown", this._handleEscapeClose);
   }
 
   // Close on ESC
@@ -26,8 +26,8 @@ class Popup {
   setEventListeners() {
     this._popup.addEventListener("mousedown", (evt) => {
       if (
-        evt.target.classList.contains(".popup_visible") ||
-        evt.target.classList.contains(".popup__close")
+        evt.target.classList.contains("popup_visible") ||
+        evt.target.classList.contains("popup__close")
       ) {
         this.close();
       }

@@ -10,9 +10,9 @@ class TodoCounter {
   // to-do is deleted.
   updateCompleted = (increment) => {
     if (increment) {
-      this._completed = +1;
+      this._completed += 1;
     } else {
-      this._completed = -1;
+      this._completed -= 1;
     }
     this._updateText();
   };
@@ -20,6 +20,7 @@ class TodoCounter {
   // Call this when a to-do is deleted, or when a to-do is
   // created via the form.
   updateTotal = (increment) => {
+    this._total += increment ? 1 : -1;
     this._updateText();
   };
 

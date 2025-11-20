@@ -4,7 +4,7 @@ class PopupWithForm extends Popup {
   constructor({ popupSelector, submitCallBack }) {
     super({ popupSelector });
     this._submitCallBack = submitCallBack;
-    this._form = document.querySelector(".popup__form");
+    this._form = this._popup.querySelector(".popup__form");
     this._inputList = this._form.querySelectorAll(".popup__input");
   }
 
@@ -22,13 +22,21 @@ class PopupWithForm extends Popup {
     this._form.addEventListener("submit", (evt) => {
       evt.preventDefault();
       const formValues = this._getInputValues();
-      this._submitCallback(formValues);
-    });
-  }
+      this._submitCallBack(formValues);
+      evt.preventDefault();
+      const name = evt.target.name.value;
+      const dateInput = evt.target.date.value;
 
-  close() {
-    super.close();
-    this._form.reset(); // reset after close
+      // Create a date object and adjust for timezone
+      const date = new Date(dateInput);
+      date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+
+      const id = uuidv4();
+      const values = { name, date, id };
+      renderTodo(values);
+      newTodoFormValidator.resetValidation();
+      closeModal(addTodoPopupEl);
+    });
   }
 }
 
