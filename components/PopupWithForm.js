@@ -23,7 +23,6 @@ class PopupWithForm extends Popup {
       evt.preventDefault();
       const formValues = this._getInputValues();
       this._submitCallBack(formValues);
-      evt.preventDefault();
       const name = evt.target.name.value;
       const dateInput = evt.target.date.value;
 
@@ -31,11 +30,8 @@ class PopupWithForm extends Popup {
       const date = new Date(dateInput);
       date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
 
-      const id = uuidv4();
-      const values = { name, date, id };
-      renderTodo(values);
-      newTodoFormValidator.resetValidation();
-      closeModal(addTodoPopupEl);
+      this._form.reset();
+      this.close();
     });
   }
 }

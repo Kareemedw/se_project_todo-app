@@ -22,7 +22,7 @@ class Todo {
   _setEventListeners() {
     this._todoCheckboxEl.addEventListener("change", () => {
       this._toggleCompletion();
-      this._handleCheck(!this._completed);
+      this._handleCheck(this._completed);
     });
 
     this._todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");

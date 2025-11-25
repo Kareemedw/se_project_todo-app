@@ -48,7 +48,19 @@ section.renderItems();
 const addTodoPopup = new PopupWithForm({
   popupSelector: "#add-todo-popup",
   submitCallBack: (formValues) => {
-    const { name, date } = formValues;
+    const id = uuidv4();
+    newTodoFormValidator.resetValidation();
+    const values = {
+      name: formValues.name,
+      date: formValues.date,
+      id,
+      completed: false,
+    };
+
+    todoCounter.updateTotal(true); // ADD ONE
+    const todo = generateTodo(todosList);
+    renderTodo(values);
+    //const { name, date } = formValues;
   },
 });
 
