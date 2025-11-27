@@ -25,7 +25,8 @@ function handleCheck(completed) {
 }
 
 function handleDelete(completed) {
-  todoCounter.updateCompleted(completed);
+  todoCounter.updateTotal(false);
+  if (completed) todoCounter.updateCompleted(false);
 }
 
 const section = new Section({
@@ -49,7 +50,6 @@ const addTodoPopup = new PopupWithForm({
   popupSelector: "#add-todo-popup",
   submitCallBack: (formValues) => {
     const id = uuidv4();
-    newTodoFormValidator.resetValidation();
     const values = {
       name: formValues.name,
       date: formValues.date,
@@ -60,7 +60,6 @@ const addTodoPopup = new PopupWithForm({
     todoCounter.updateTotal(true); // ADD ONE
     const todo = generateTodo(todosList);
     renderTodo(values);
-    //const { name, date } = formValues;
   },
 });
 
